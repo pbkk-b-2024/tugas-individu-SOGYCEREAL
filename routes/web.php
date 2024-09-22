@@ -11,12 +11,15 @@ use App\Http\Controllers\ReturController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\PengirimanController;
 use App\Http\Controllers\PenjualanController;
-
-Route::get('/', function(){
-    return view('auth.login');
-});
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 
 
+Route::middleware('auth')->get('/', [HomeController::class, 'checkUserType']);
+
+// Route::get('/user', function(){
+//     return view('user.index');
+// })->name('user');
 
 Route::resource('penjualan', PenjualanController::class)->names([
     'index' => 'penjualan.index',
@@ -49,8 +52,6 @@ Route::resource('retur', ReturController::class)->names([
     'update' => 'retur.update',
     'destroy' => 'retur.destroy',
 ]);
-
-
 
 Route::resource('pemesanan', PemesananController::class)->names([
     'index' => 'pemesanan.index',
@@ -122,3 +123,39 @@ Route::resource('produk', ProdukController::class)->names([
     'update' => 'produk.update',
     'destroy' => 'produk.destroy',
 ]);
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('layout.dashboard');
+    })->name('dashboard');
+});
+
+Route::get('/user/dashboard', function () {
+    return view('user.userDashboard'); // Ensure the view file is named correctly
+})->name('user.dashboard');
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.adminDashboard'); // Ensure the view file is named correctly
+})->name('admin.dashboard');
+
+use App\Http\Controllers\UserListController;
+
+Route::resource('userlist', UserListController::class)->names([
+    'index' => 'userlist.index',
+    'create' => 'userlist.create',
+    'store' => 'userlist.store',
+    'show' => 'userlist.show',
+    'edit' => 'userlist.edit',
+    'update' => 'userlist.update',
+    'destroy' => 'userlist.destroy',
+]);
+
+
+
+
+

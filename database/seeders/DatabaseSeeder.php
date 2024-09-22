@@ -11,9 +11,8 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-
     public function run(): void
-     {
+    {
         $this->call([
             KategoriProdukTableSeeder::class,
             SupplierTableSeeder::class,
@@ -25,11 +24,9 @@ class DatabaseSeeder extends Seeder
             TransaksiStokTableSeeder::class,
             ReturTableSeeder::class,
             PengirimanTableSeeder::class,
+            UserSeeder::class
         ]);
         
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // User::factory(10)->withPersonalTeam()->create();
     }
 }

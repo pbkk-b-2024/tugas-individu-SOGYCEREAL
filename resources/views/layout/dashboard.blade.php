@@ -30,7 +30,7 @@
                             <p class="card-text"></p>
                             <a href="{{ route('pemesanan.index') }}" class="card-link">Pemesanan</a>
                             <p class="card-text"></p>
-                            <a href="{{ route('penjualan.index') }}" class="card-link">Penjualan</a>
+                            <a href="{{ route('penjualan.index') }}" class="card-link">Penjualan</a>             
                         </div>
                     </div>
                 </div>
